@@ -6,7 +6,7 @@
 
 @section('content')
     @env('local')
-        <div style="background-color: antiquewhite; padding: 10px; text-align: center; font-weight: bold; color: brown; position: fixed; width: 100%;">
+        <div style="background-color: antiquewhite; padding: 2rem; text-align: center; font-weight: bold; color: brown; position: fixed; width: 100%; font-size: 2rem;">
         개발 서버용 로그인 정보 (개발 서버일 때만 뜹니다)<br><br>
         아이디: admin<br>
         비밀번호: 1
