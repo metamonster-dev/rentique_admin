@@ -60,7 +60,7 @@ class UserController extends Controller
 
             $users = $query->latest()->paginate(10);
 
-            return view('users.index', compact('users'));
+            return view('user.users.index', compact('users'));
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {
@@ -79,7 +79,7 @@ class UserController extends Controller
 
             $defaultShippingAddress = $user->default_shipping_address;
 
-            return view('users.show', compact('user', 'totalPoints', 'defaultShippingAddress'));
+            return view('user.users.show', compact('user', 'totalPoints', 'defaultShippingAddress'));
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {
@@ -179,7 +179,7 @@ class UserController extends Controller
 
             User::whereIn('id', $selectedIds)->delete();
 
-            return redirect()->route('users.index')->with('success', '선택한 회원이 탈퇴되었습니다.');
+            return redirect()->route('user.users.index')->with('success', '선택한 회원이 탈퇴되었습니다.');
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {

@@ -60,7 +60,7 @@ class WithdrawnUserController extends Controller
 
             $users = $query->latest()->paginate(10);
 
-            return view('withdrawn_users.index', compact('users'));
+            return view('user.withdrawn_users.index', compact('users'));
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {
@@ -79,7 +79,7 @@ class WithdrawnUserController extends Controller
 
             $defaultShippingAddress = $user->default_shipping_address;
 
-            return view('withdrawn_users.show', compact('user', 'totalPoints', 'defaultShippingAddress'));
+            return view('user.withdrawn_users.show', compact('user', 'totalPoints', 'defaultShippingAddress'));
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {
