@@ -8,8 +8,8 @@
     @env('local')
         <div style="background-color: antiquewhite; padding: 10px; text-align: center; font-weight: bold; color: brown; position: fixed; width: 100%;">
         개발 서버용 로그인 정보 (개발 서버일 때만 뜹니다)<br><br>
-        아이디 - admin<br>
-        비밀번호 - 1
+        아이디: admin<br>
+        비밀번호: 1
     </div>
     @endenv
 
