@@ -1,3 +1,5 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <section id="admin_header_wrap">
     <div id="admin_top_area">
         <div class="user_area">
@@ -5,7 +7,7 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            <button onclick="event.preventDefault(); handleLogout();" type="button">로그아웃</button>
+            <button onclick="handleLogout();" type="button">로그아웃</button>
             <button onclick="location.href=''" style="background:#7F23F3;" type="button">RENTIQUE</button>
         </div>
     </div>
@@ -144,7 +146,12 @@
 
                     const parentGroup = link.closest('.adm_nav_depth2_group');
                     if (parentGroup) {
+                        parentGroup.querySelector('p').classList.add('on');
                         parentGroup.querySelector('.adm_nav_depth2_ul').style.display = 'block'; // 서브메뉴 펼치기
+                    } else {
+                        const parentGroup = link.closest('.adm_nav_depth1');
+
+                        parentGroup.classList.add('on');
                     }
                 }
             });
