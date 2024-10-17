@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '일반회원 상세')
+@section('title', '일반회원')
 
 @section('content')
     <section id="admin_contents_wrap">
@@ -70,34 +70,8 @@
 
         // 탈퇴 버튼 클릭 처리
         document.getElementById('delete-btn').addEventListener('click', function() {
-            if (confirm('{{ $user->name }}님을 정말로 탈퇴 처리하시겠습니까?')) {
-                fetch('{{ route('users.destroy', $user->id) }}', {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.status === 422) {
-                        return response.json().then(data => {
-                            let errorMessage = data.errors.memo ? data.errors.memo[0] : '입력 오류가 발생했습니다.';
-                            alert(errorMessage);
-                            throw new Error(errorMessage);
-                        });
-                    }
-                    return response.json();
-                }).then(data => {
-                    alert(data.message);
-                    if (data.success) {
-                        window.location.href = '{{ route('users.index') }}';
-                    } else {
-                        window.location.reload();
-                    }
-                })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('네트워크 오류가 발생했습니다.');
-                    });
+            if (confirm('{{ $user->name }}님을 탈퇴 처리하시겠습니까?')) {
+                fetchRequest('{{ route('users.delete', $user->id) }}', 'DELETE', null, '{{ route('users.index') }}');
             }
         });
 
@@ -111,36 +85,7 @@
             }
 
             if (confirm('메모를 저장하시겠습니까?')) {
-                fetch('{{ route('users.update', $user->id) }}', {
-                    method: 'PUT',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        memo: memo
-                    })
-                }).then(response => {
-                    if (response.status === 422) {
-                        return response.json().then(data => {
-                            let errorMessage = data.errors.memo ? data.errors.memo[0] : '입력 오류가 발생했습니다.';
-                            alert(errorMessage);
-                            throw new Error(errorMessage);
-                        });
-                    }
-                    return response.json();
-                }).then(data => {
-                    alert(data.message);
-                    if (data.success) {
-                        window.location.href = '{{ route('users.index') }}';
-                    } else {
-                        window.location.reload();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('네트워크 오류가 발생했습니다.');
-                });
+                fetchRequest('{{ route('users.update', $user->id) }}', 'PATCH', { memo: memo }, '{{ route('users.index') }}');
             }
         });
     </script>

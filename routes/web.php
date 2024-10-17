@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawnUserController;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +21,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AdminDashboardController::class, 'logout'])->name('logout');
 
-//    Route::delete('/users/delete', [UserController::class, 'delete'])->name('users.delete');
-    Route::delete('/users/bulk-delete', [UserController::class, 'bulkDelete'])->name('users.bulkDelete');
-    Route::resource('users', UserController::class);
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::patch('users/update/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('users/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    Route::delete('users/bulk-delete', [UserController::class, 'bulkDelete'])->name('users.bulkDelete');
 
     Route::get('withdrawnUsers', [WithdrawnUserController::class, 'index'])->name('withdrawnUsers.index');
     Route::get('withdrawnUsers/{id}', [WithdrawnUserController::class, 'show'])->name('withdrawnUsers.show');

@@ -133,7 +133,7 @@ class UserController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         try {
             $user = User::findOrFail($id);
@@ -141,13 +141,13 @@ class UserController extends Controller
             if ($user->delete()) {
                 return response()->json([
                     'success' => true,
-                    'message' => '사용자가 성공적으로 삭제되었습니다.',
+                    'message' => '사용자가 성공적으로 탈퇴되었습니다.',
                 ]);
             }
 
             return response()->json([
                 'success' => false,
-                'message' => '사용자 삭제에 실패했습니다.',
+                'message' => '사용자 탈퇴에 실패했습니다.',
             ], 500);
 
         } catch (ModelNotFoundException) {
@@ -179,7 +179,7 @@ class UserController extends Controller
 
             User::whereIn('id', $selectedIds)->delete();
 
-            return redirect()->route('users.index')->with('success', '선택한 회원이 삭제되었습니다.');
+            return redirect()->route('users.index')->with('success', '선택한 회원이 탈퇴되었습니다.');
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {
