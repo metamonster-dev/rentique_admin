@@ -29,7 +29,7 @@
                     <!--DEPTH 2-->
                     <ul class="adm_nav_depth2_ul">
                         <li><a href="{{ route('users.index') }}">일반 회원</a></li>
-                        <li><a href="./member02.html">탈퇴 회원</a></li>
+                        <li><a href="{{ route('withdrawnUsers.index') }}">탈퇴 회원</a></li>
                     </ul>
                 </li>
                 <!--DEPTH 1-->

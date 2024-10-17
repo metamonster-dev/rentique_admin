@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WithdrawnUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::delete('/users/bulk-delete', [UserController::class, 'bulkDelete'])->name('users.bulkDelete');
     Route::resource('users', UserController::class);
 
-
-//    Route::resource('notices', NoticeController::class);
-//    Route::get('/notices', [NoticeController::class, 'index'])->name('notices.index');
+    Route::get('withdrawnUsers', [WithdrawnUserController::class, 'index'])->name('withdrawnUsers.index');
+    Route::get('withdrawnUsers/{id}', [WithdrawnUserController::class, 'show'])->name('withdrawnUsers.show');
+    Route::patch('withdrawnUsers/update/{id}', [WithdrawnUserController::class, 'update'])->name('withdrawnUsers.update');
+    Route::patch('withdrawnUsers/restore/{id}', [WithdrawnUserController::class, 'restore'])->name('withdrawnUsers.restore');
+    Route::patch('withdrawnUsers/bulk-restore', [WithdrawnUserController::class, 'bulkRestore'])->name('withdrawnUsers.bulkRestore');
 });
