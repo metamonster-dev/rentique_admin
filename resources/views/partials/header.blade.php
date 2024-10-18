@@ -38,7 +38,7 @@
                     <!--DEPTH 2-->
                     <ul class="adm_nav_depth2_ul">
                         <li><a href="./product01.html">상품 관리</a></li>
-                        <li><a href="./product02.html">카테고리 관리</a></li>
+                        <li><a href="{{ route('categories.index') }}">카테고리 관리</a></li>
                         <li><a href="./product03.html">브랜드 관리</a></li>
                     </ul>
                 </li>
