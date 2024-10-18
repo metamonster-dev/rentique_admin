@@ -71,7 +71,7 @@
         // 탈퇴 버튼 클릭 처리
         document.getElementById('delete-btn').addEventListener('click', function() {
             if (confirm('{{ $user->name }}님을 탈퇴 처리하시겠습니까?')) {
-                fetchRequest('{{ route('users.delete', $user->id) }}', 'DELETE', null, '{{ route('users.index') }}');
+                fetchRequest('{{ route('users.delete', $user->id) }}', 'DELETE', {}, '{{ route('users.index') }}');
             }
         });
 

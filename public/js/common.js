@@ -41,6 +41,9 @@ document.addEventListener('keydown', function (event) {
 
 // 검색 버튼 클릭 시 검증
 function validateForm() {
+    if (!document.getElementById('start-date') && !document.getElementById('end-date')) {
+        return;
+    }
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
 
@@ -63,7 +66,7 @@ function validateForm() {
 }
 
 // api 전송
-function fetchRequest(url, method = 'GET', data = null, redirectUrl = null) {
+function fetchRequest(url, method = 'GET', data = {}, redirectUrl = null) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // CSRF 토큰을 메타 태그에서 가져옴
 
     const headers = {

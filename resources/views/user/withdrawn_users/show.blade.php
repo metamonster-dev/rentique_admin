@@ -77,7 +77,7 @@
         // 복구 버튼 클릭 처리
         document.getElementById('restore-btn').addEventListener('click', function() {
             if (confirm('{{ $user->name }}님을 복구 처리하시겠습니까?')) {
-                fetchRequest('{{ route('withdrawnUsers.restore', $user->id) }}', 'PATCH', null, '{{ route('withdrawnUsers.index') }}');
+                fetchRequest('{{ route('withdrawnUsers.restore', $user->id) }}', 'PATCH', {}, '{{ route('withdrawnUsers.index') }}');
             }
         });
 

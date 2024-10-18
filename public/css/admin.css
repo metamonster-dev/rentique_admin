@@ -456,3 +456,7 @@ body:has(.adminPopup_common){min-width:100%;}
 .adminPopup_common .title{margin-bottom:0;color:#fff}
 .popup_contents{padding:20px 16px}
 .popup_contents .btn_area.center{margin-top:40px}
+
+button {
+    cursor: pointer;
+}

@@ -28,10 +28,11 @@ class Point extends Model
         'expiration_date' => 'date',
     ];
 
+    protected $dates = ['deleted_at'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    protected $dates = ['deleted_at'];
 }
