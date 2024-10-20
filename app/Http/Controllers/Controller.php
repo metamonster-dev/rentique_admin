@@ -10,6 +10,12 @@ abstract class Controller
 {
     protected function handleException(Exception $e, $customMessage): RedirectResponse
     {
+        if (is_array($customMessage)) {
+            $customMessage = implode(' ', array_map(function ($error) {
+                return is_array($error) ? implode(' ', $error) : $error;
+            }, $customMessage));
+        }
+
         Log::error($customMessage, [
             'error_message' => $e->getMessage(),
             'stack_trace' => $e->getTraceAsString(),

@@ -22,6 +22,7 @@ class UserController extends Controller
             'start_date.before_or_equal' => '시작일은 종료일보다 늦을 수 없습니다.',
             'end_date.after_or_equal' => '종료일은 시작일보다 빠를 수 없습니다.',
             'search_type.in' => '검색어 타입은 아이디, 이름, 휴대폰번호 중 하나여야 합니다.',
+            'keyword.max' => '검색어는 최대 255자까지 입력 가능합니다.',
         ]);
 
         try {
@@ -61,6 +62,8 @@ class UserController extends Controller
             $users = $query->latest()->paginate(10);
 
             return view('user.users.index', compact('users'));
+        } catch (ValidationException $e) {
+            return $this->handleException($e, $e->errors());
         } catch (ModelNotFoundException $e) {
             return $this->handleException($e, '해당 유저를 찾을 수 없습니다.');
         } catch (QueryException $e) {
@@ -94,6 +97,9 @@ class UserController extends Controller
         try {
             $request->validate([
                 'memo' => 'required|string|max:100',
+            ], [
+                'memo.required' => '메모를 입력해 주세요.',
+                'memo.max' => '메모는 최대 100자까지 입력 가능합니다.',
             ]);
 
             $user = User::findOrFail($id);

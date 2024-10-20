@@ -37,6 +37,13 @@ class CategoryController extends Controller
                 'level' => 'required|integer',
                 'name' => 'required|string|max:255',
                 'is_visible' => 'required|boolean',
+            ], [
+                'parent_id.exists' => '부모 카테고리를 찾을 수 없습니다.',
+                'level.required' => '카테고리 레벨을 입력해 주세요.',
+                'level.integer' => '카테고리 레벨은 숫자로 입력해 주세요.',
+                'name.required' => '카테고리 이름을 입력해 주세요.',
+                'name.max' => '카테고리 이름은 최대 255자까지 입력 가능합니다.',
+                'is_visible.required' => '카테고리 표시 여부를 선택해 주세요.',
             ]);
 
             Category::updateOrCreate(
@@ -117,6 +124,13 @@ class CategoryController extends Controller
                     'level' => 'required|integer',
                     'parent_id' => 'nullable|exists:categories,id',
                     'is_visible' => 'required|boolean',
+                ], [
+                    'name.required' => '카테고리 이름을 입력해 주세요.',
+                    'name.max' => '카테고리 이름은 최대 255자까지 입력 가능합니다.',
+                    'level.required' => '카테고리 레벨을 입력해 주세요.',
+                    'level.integer' => '카테고리 레벨은 숫자로 입력해 주세요.',
+                    'parent_id.exists' => '부모 카테고리를 찾을 수 없습니다.',
+                    'is_visible.required' => '카테고리 표시 여부를 선택해 주세요.',
                 ]);
 
                 $validated = $validator->validated();

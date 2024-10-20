@@ -22,7 +22,7 @@
                             <option value="휴대폰번호" {{ old('search_type', request('search_type')) === '휴대폰번호' ? 'selected' : '' }}>휴대폰번호</option>
                         </select>
 
-                        <input type="text" id="search-content" name="keyword" value="{{ old('keyword', request('keyword')) }}" style="width:260px" placeholder="검색어를 입력해주세요.">
+                        <input type="text" id="search-content" name="keyword" value="{{ old('keyword', request('keyword')) }}" style="width:260px" maxlength="255" placeholder="검색어를 입력해주세요.">
                         <button type="submit" id="fa-search"><i class="fa fa-search" aria-hidden="true"></i>검색</button>
                         <a href="{{ route('withdrawnUsers.index') }}">
                             <button type="button"><i class="fa fa-repeat" aria-hidden="true"></i>초기화</button>
